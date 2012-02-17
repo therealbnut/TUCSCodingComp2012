@@ -18,30 +18,31 @@ public class TUCSDevCompExample2012
 
 		if (args.length == 2 && args[0].equals("--output"))
 		{
-			TUCSDevCompExample2012.processInput(input, args[1]);
+			TUCSDevCompExample2012.processInput(input, null, args[1]);
+		}
+		else if (args.length == 6 && args[0].equals("--output"))
+		{
+			Rectangle bounds;
+			Point p1, p2;
+			p1 = new Point(Integer.parseInt(args[2]), Integer.parseInt(args[3]));
+			p2 = new Point(Integer.parseInt(args[4]), Integer.parseInt(args[5]));
+			bounds = new Rectangle(p1);
+			bounds.add(p2);
+			TUCSDevCompExample2012.processInput(input, bounds, args[1]);
 		}
 		else
 		{
-			TUCSDevCompExample2012.processInput(input, null);
+			TUCSDevCompExample2012.processInput(input, null, null);
 		}
 	}
 
-	public static void processInput(BufferedReader input, String output)
+	public static void processInput(BufferedReader input, Rectangle bounds, String output)
 	{
 		int size[] = new int[2];
-		Rectangle bounds = null;
 		Vector<Color> colours;
 		Point point;
 
 		colours = TUCSDevCompExample2012.readImage(input, size);
-		for (int i=0; i<colours.size(); ++i)
-		{
-			point = new Point(i%size[0], i/size[0]);
-			if (compareColours(colours.get(i), TUCSDevCompExample2012.CREEPER_COLOUR, 0.02f))
-			{
-				if (bounds == null) bounds = new Rectangle(point); else bounds.add(point);
-			}
-		}
 
 		if (bounds != null)
 		{
@@ -49,11 +50,29 @@ public class TUCSDevCompExample2012
 			{
 				processOutput(output, colours, size[0], size[1], bounds);
 			}
-			System.out.print(""  + (int)(bounds.getX()));
-			System.out.print(" " + (int)(bounds.getY()));
-			System.out.print(" " + (int)(bounds.getX()+bounds.getWidth()));
-			System.out.print(" " + (int)(bounds.getY()+bounds.getHeight()));
-			System.out.print("\n");
+		}
+		else
+		{
+			for (int i=0; i<colours.size(); ++i)
+			{
+				point = new Point(i%size[0], i/size[0]);
+				if (compareColours(colours.get(i), TUCSDevCompExample2012.CREEPER_COLOUR, 0.02f))
+				{
+					if (bounds == null) bounds = new Rectangle(point); else bounds.add(point);
+				}
+			}
+			if (bounds != null)
+			{
+				if (output != null)
+				{
+					processOutput(output, colours, size[0], size[1], bounds);
+				}
+				System.out.print(""  + (int)(bounds.getX()));
+				System.out.print(" " + (int)(bounds.getY()));
+				System.out.print(" " + (int)(bounds.getX()+bounds.getWidth()));
+				System.out.print(" " + (int)(bounds.getY()+bounds.getHeight()));
+				System.out.print("\n");
+			}
 		}
 	}
 
@@ -143,11 +162,7 @@ public class TUCSDevCompExample2012
 		}
 		try
 		{
-			if (ImageIO.write(image, "png", new File(output)))
-			{
-				System.out.println("done");
-			}
-			else
+			if (!ImageIO.write(image, "png", new File(output)))
 			{
 				System.err.println("unable to write png!");
 			}
