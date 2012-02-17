@@ -2,9 +2,9 @@ import java.awt.image.*;
 import javax.imageio.ImageIO;
 import java.io.*;
 
-public class CreeperImagify
+public class CreepEncodeImage
 {
-	static final String COMMAND_USAGE      = "Usage: java CreeperImagify [filename ...]";
+	static final String COMMAND_USAGE      = "Usage: java CreepEncodeImage [filename ...]";
 	static final String INPUT_INSTRUCTIONS = "Enter file names or \"q\" to exit.";
 	public static void main(String[] args)
 	{
@@ -20,8 +20,8 @@ public class CreeperImagify
 			BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 			String filename;
 
-			System.out.println(CreeperImagify.COMMAND_USAGE);
-			System.out.println(CreeperImagify.INPUT_INSTRUCTIONS);
+			System.out.println(CreepEncodeImage.COMMAND_USAGE);
+			System.out.println(CreepEncodeImage.INPUT_INSTRUCTIONS);
 
 			do
 			{
@@ -36,9 +36,9 @@ public class CreeperImagify
 					System.err.println("Failed to read line: " + e);
 					break;
 				}
-				if (!CreeperImagify.processFile(filename))
+				if (!CreepEncodeImage.processFile(filename))
 				{
-					System.out.println(CreeperImagify.INPUT_INSTRUCTIONS);
+					System.out.println(CreepEncodeImage.INPUT_INSTRUCTIONS);
 				}
 			}
 			while (true);
