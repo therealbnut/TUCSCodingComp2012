@@ -7,7 +7,7 @@ import java.awt.image.*;
 import javax.imageio.ImageIO;
 
 
-public class TUCSDevCompExample2011
+public class TUCSDevCompExample2012
 {
 	public static final Color CREEPER_COLOUR = new Color(73, 156, 64);
 
@@ -18,11 +18,11 @@ public class TUCSDevCompExample2011
 
 		if (args.length == 2 && args[0].equals("--output"))
 		{
-			TUCSDevCompExample2011.processInput(input, args[1]);
+			TUCSDevCompExample2012.processInput(input, args[1]);
 		}
 		else
 		{
-			TUCSDevCompExample2011.processInput(input, null);
+			TUCSDevCompExample2012.processInput(input, null);
 		}
 	}
 
@@ -33,11 +33,11 @@ public class TUCSDevCompExample2011
 		Vector<Color> colours;
 		Point point;
 
-		colours = TUCSDevCompExample2011.readImage(input, size);
+		colours = TUCSDevCompExample2012.readImage(input, size);
 		for (int i=0; i<colours.size(); ++i)
 		{
 			point = new Point(i%size[0], i/size[0]);
-			if (compareColours(colours.get(i), TUCSDevCompExample2011.CREEPER_COLOUR, 0.02f))
+			if (compareColours(colours.get(i), TUCSDevCompExample2012.CREEPER_COLOUR, 0.02f))
 			{
 				if (bounds == null) bounds = new Rectangle(point); else bounds.add(point);
 			}

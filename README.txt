@@ -26,7 +26,7 @@ Step 2: Create a .creep formatted file from an image to give to the program
 java CreepEncodeImage creeper.jpeg
 
 Step 3: Pass the .creep formatted file to the program, it will output the bounding box
-java TUCSDevCompExample2011 --output creeper.jpeg.creep.png < creeper.jpeg.creep 
+java TUCSDevCompExample2012 --output creeper.jpeg.creep.png < creeper.jpeg.creep 
 
 Example output:
 120 340 240 480
